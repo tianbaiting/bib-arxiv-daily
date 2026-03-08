@@ -2,7 +2,15 @@
 
 [简体中文说明 / Chinese README](./README.zh-CN.md)
 
-`bib-arxiv-daily` recommends newly announced arXiv papers based on the papers in your local `.bib` files, then sends the results by email on a daily schedule using GitHub Actions. It also includes a manual workflow for a last-7-days top-10 recommendation run.
+`bib-arxiv-daily` recommends newly announced arXiv papers based on the papers in your local `.bib` files, then sends the results by email on a daily schedule using GitHub Actions. It also includes a manual workflow for a last-7-days top-10 recommendation run, and the same manual mode can be stretched with custom parameters. For example, you can search up to `1000` candidates from the last `99` days and keep the top `50` matches:
+
+```bash
+.venv/bin/python src/main.py --config config.yaml --lookback-days 99 --max-candidates 1000 --max-results 50 --dry-run --output-html output/manual_99day_top50_report.html
+```
+
+So this project works both as a daily email recommender and as a search tool that ranks arXiv papers against your own `.bib` library. For "find papers close to my research taste" style queries, it is often more useful than plain keyword-and-field filtering.
+
+You can run it locally to generate an HTML report without sending email, or let GitHub Actions run it on schedule and send the results automatically.
 
 This repository is designed for beginners:
 

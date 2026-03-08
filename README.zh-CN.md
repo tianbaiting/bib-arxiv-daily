@@ -2,7 +2,15 @@
 
 [English README](./README.md)
 
-`bib-arxiv-daily` 会根据你放在本仓库中的 `.bib` 文件，去匹配每天新发布的 arXiv 论文，然后通过 GitHub Actions 定时发送推荐邮件。仓库里还提供了一个“最近 7 天 + 最接近 10 篇”的手动工作流。
+`bib-arxiv-daily` 会根据你放在本仓库中的 `.bib` 文件，去匹配每天新发布的 arXiv 论文，然后通过 GitHub Actions 定时发送推荐邮件。仓库里还提供了一个“最近 7 天 + 最接近 10 篇”的手动工作流，而这套手动模式的参数本身也是可以扩展的。比如，你可以在最近 `99` 天、最多 `1000` 篇候选论文里，筛出最相关的 `50` 篇：
+
+```bash
+.venv/bin/python src/main.py --config config.yaml --lookback-days 99 --max-candidates 1000 --max-results 50 --dry-run --output-html output/manual_99day_top50_report.html
+```
+
+所以，这个项目既可以作为一个每天自动发送相关论文邮件的工具，也可以作为一个基于你自己的 `.bib` 馆藏做语义检索和排序的搜索工具。对于“按研究兴趣找论文”这类场景，它通常会比纯关键词加字段过滤更顺手。(arxiv为关键词加字段匹配, 搜索引擎为关键词加语义检索加排名算法)
+
+你既可以在本地手动运行、生成 HTML 报告并直接在浏览器里查看，也可以交给 GitHub Actions 每天定时执行并发送邮件。(也可以本地每日定时运行,了解一下cron)
 
 这个仓库是按“小白可上手”来设计的：
 
